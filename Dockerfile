@@ -9,7 +9,7 @@ USER devel
 RUN cd /workdir && yay -G mingw-w64-fmt-git && \
         cd mingw-w64-fmt-git && \
         sed -i 's:mv "${pkgdir}"/usr/${_arch}/lib/..dll .*::g' PKGBUILD && \
-        makepkg -si && \
+        makepkg -si --noconfirm && \
         cd .. && rm -rf mingw-w64-fmt-git
 # Install AUR packages
 RUN yay -S --noconfirm --noprogressbar --needed \
