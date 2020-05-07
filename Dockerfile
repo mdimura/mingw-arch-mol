@@ -3,13 +3,21 @@
 FROM burningdaylight/mingw-arch:qt
 MAINTAINER Mykola Dimura <mykola.dimura@gmail.com>
 
-# Install AUR packages
+
 USER devel
+#Workaroung until mingw-w64-fmt-git is fixed
+RUN yay -G mingw-w64-fmt-git && \
+        cd mingw-w64-fmt-git && \
+        sed -i 's:mv "${pkgdir}"/usr/${_arch}/lib/..dll .*::g' PKGBUILD && \
+        makepkg -si && \
+        cd .. && rm -rf mingw-w64-fmt-git
+# Install AUR packages
 RUN yay -S --noconfirm --noprogressbar --needed \
         mingw-w64-spdlog-git \
         mingw-w64-async++-git \
         mingw-w64-libcuckoo-git \
-        mingw-w64-readerwriterqueue-git
+        mingw-w64-readerwriterqueue-git \
+        mingw-w64-pteros
 
 # Cleanup
 USER root
