@@ -6,7 +6,7 @@ MAINTAINER Mykola Dimura <mykola.dimura@gmail.com>
 
 USER devel
 #Workaroung until mingw-w64-fmt-git is fixed
-RUN yay -G mingw-w64-fmt-git && \
+RUN cd /workdir && yay -G mingw-w64-fmt-git && \
         cd mingw-w64-fmt-git && \
         sed -i 's:mv "${pkgdir}"/usr/${_arch}/lib/..dll .*::g' PKGBUILD && \
         makepkg -si && \
