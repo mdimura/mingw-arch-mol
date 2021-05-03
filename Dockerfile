@@ -14,9 +14,11 @@ RUN yay -S --noconfirm --noprogressbar --needed \
         mingw-w64-libcuckoo-git \
         mingw-w64-readerwriterqueue-git \
         mingw-w64-pteros
+USER root
+RUN ln -s /usr/x86_64-w64-mingw32/include/eigen3/Eigen /usr/x86_64-w64-mingw32/include/Eigen; \
+    ln -s /usr/i686-w64-mingw32/include/eigen3/Eigen /usr/i686-w64-mingw32/include/Eigen;
 
 # Cleanup
-USER root
 RUN pacman -Scc --noconfirm
 RUN paccache -r -k0; \
     rm -rf /usr/share/man/*; \
